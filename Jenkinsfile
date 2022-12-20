@@ -6,7 +6,7 @@ pipeline {
             }
 
 options {
-    buildDiscarder(logRotator(numToKeepStr: '20'))
+    buildDiscarder(logRotator(numToKeepStr: '2'))
     disableConcurrentBuilds()
     timeout (time: 60, unit: 'MINUTES')
     timestamps()
@@ -32,28 +32,28 @@ options {
                             ),
 
                           string(
-                            defaultValue: 'eric-001',
+                            defaultValue: 'Tankoua-Jenkinsfile-02',
                             name: 'DB-Tag',
 			                description: 'Required to enter the image tag',
                             trim: true
                             ),
 
                           string(
-                            defaultValue: 'eric-001',
+                            defaultValue: 'Tankoua-Jenkinsfile-02',
                             name: 'UI-Tag',
 			                description: 'Required to enter the image tag',
                             trim: true
                             ),
 
                           string(
-                            defaultValue: 'eric-001',
+                            defaultValue: 'Tankoua-Jenkinsfile-02',
                             name: 'WEATHER-Tag',
 			                description: 'Required to enter the image tag',
                             trim: true
                             ),
 
                           string(
-                            defaultValue: 'eric-001',
+                            defaultValue: 'Tankoua-Jenkinsfile-02',
                             name: 'AUTH-Tag',
 			                description: 'Required to enter the image tag',
                             trim: true
