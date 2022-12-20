@@ -64,7 +64,7 @@ options {
             }
         }
  
-        stage('Hello') {
+        stage('Permission') {
             steps {
                 sh '''
                 ls 
