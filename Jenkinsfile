@@ -97,7 +97,6 @@ options {
                 sh '''
                 ls 
                 pwd
-                uname-r
                 '''
             }
         }
@@ -106,7 +105,6 @@ options {
                 sh '''
                 ls 
                 pwd
-                uname-r
                 '''
             }
         }
