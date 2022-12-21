@@ -111,62 +111,123 @@ options {
             }
         }
         stage('build-dev') {
+		when{ 
+          expression {
+            env.Environment == 'DEV' }
+            }
             steps {
                 sh '''
-                ls 
-                pwd
+               cd auth
+	       docker build  -t devopeasylearning2021/s4-auth:${BUILD_NUMBER}-$AUTHTag .
+	       cd ~
+	       cd DB
+	       docker build  -t devopeasylearning2021/s4-db:${BUILD_NUMBER}-$DBTag .
+	       cd ~
+	       cd UI
+	       docker build  -t devopeasylearning2021/s4-ui:${BUILD_NUMBER}-$AUTHTag .
+	       cd ~
+	       cd weather
+	       docker build  -t devopeasylearning2021/s4-weather:${BUILD_NUMBER}-$WEATHERTag .
+	       cd ~
+	       
                 '''
             }
         }
         stage('build-sanbox') {
+		when{ 
+          expression {
+            env.Environment == 'SANBOX' }
+            }
             steps {
                 sh '''
-                ls 
-                pwd
+               cd auth
+	       docker build  -t devopeasylearning2021/s4-auth:${BUILD_NUMBER}-$AUTHTag .
+	       cd ~
+	       cd DB
+	       docker build  -t devopeasylearning2021/s4-db:${BUILD_NUMBER}-$DBTag .
+	       cd ~
+	       cd UI
+	       docker build  -t devopeasylearning2021/s4-ui:${BUILD_NUMBER}-$AUTHTag .
+	       cd ~
+	       cd weather
+	       docker build  -t devopeasylearning2021/s4-weather:${BUILD_NUMBER}-$WEATHERTag .
+	       cd ~
                 '''
             }
         }
         stage('build-prod') {
+		when{ 
+          expression {
+            env.Environment == 'PROD' }
+            }
             steps {
                 sh '''
-                ls 
-                pwd
+               cd auth
+	       docker build  -t devopeasylearning2021/s4-auth:${BUILD_NUMBER}-$AUTHTag .
+	       cd ~
+	       cd DB
+	       docker build  -t devopeasylearning2021/s4-db:${BUILD_NUMBER}-$DBTag .
+	       cd ~
+	       cd UI
+	       docker build  -t devopeasylearning2021/s4-ui:${BUILD_NUMBER}-$AUTHTag .
+	       cd ~
+	       cd weather
+	       docker build  -t devopeasylearning2021/s4-weather:${BUILD_NUMBER}-$WEATHERTag .
+	       cd ~
                 '''
             }
         }
         stage('login') {
             steps {
                 sh '''
-                ls 
-                pwd
+echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u devopseasylearning2021 --password-stdin
                 '''
             }
         }
         stage('push-to-dokerhub-dev') {
+		when{ 
+              expression {
+                env.Environment == 'DEV' }
+                }
             steps {
                 sh '''
-                ls 
-                pwd
+	       docker push  -t devopeasylearning2021/s4-auth:${BUILD_NUMBER}-$AUTHTag 
+	       docker push  -t devopeasylearning2021/s4-db:${BUILD_NUMBER}-$DBTag 
+	       docker push  -t devopeasylearning2021/s4-ui:${BUILD_NUMBER}-$AUTHTag 
+	       docker push  -t devopeasylearning2021/s4-weather:${BUILD_NUMBER}-$WEATHERTag
                 '''
             }
         }
        stage('push-to-dokerhub-sanbox') {
+	       when{ 
+              expression {
+                env.Environment == 'SANBOX' }
+                }
             steps {
                 sh '''
-                ls 
-                pwd
+	       docker push  -t devopeasylearning2021/s4-auth:${BUILD_NUMBER}-$AUTHTag 
+	       docker push  -t devopeasylearning2021/s4-db:${BUILD_NUMBER}-$DBTag 
+	       docker push  -t devopeasylearning2021/s4-ui:${BUILD_NUMBER}-$AUTHTag 
+	       docker push  -t devopeasylearning2021/s4-weather:${BUILD_NUMBER}-$WEATHERTag 
                 '''
             }
         } 
          stage('push-to-dokerhub-prod') {
+		 when{ 
+              expression {
+                env.Environment == 'PROD' }
+                }
             steps {
                 sh '''
-                ls 
-                pwd
+	       docker push  -t devopeasylearning2021/s4-auth:${BUILD_NUMBER}-$AUTHTag 
+	       docker push  -t devopeasylearning2021/s4-db:${BUILD_NUMBER}-$DBTag 
+	       docker push  -t devopeasylearning2021/s4-ui:${BUILD_NUMBER}-$AUTHTag 
+	       docker push  -t devopeasylearning2021/s4-weather:${BUILD_NUMBER}-$WEATHERTag 
                 '''
             }
         } 
          stage('update helm charts-sanbox') {
+		 
             steps {
                 sh '''
                 ls 
